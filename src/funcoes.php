@@ -15,7 +15,16 @@ class Funcoes
 
      * */
     public function SeculoAno(int $ano): int {
-        
+        $verifica = ($ano/100);
+        $seculo = 0;
+        if(floor($verifica) == $verifica){
+            $seculo = $verifica;
+            return $seculo;
+        }
+        else{
+            $seculo = floor($verifica)+1;
+            return $seculo;
+        }
     }
 
     
@@ -37,7 +46,21 @@ class Funcoes
 
      * */
     public function PrimoAnterior(int $numero): int {
-        
+        $menor = $numero -1;
+        $divisao=0;
+        $primo = 0;
+
+        while($primo <2 || $primo > 2){
+            for($i=1;$i <= $menor ;$i++){
+                $divisao = $menor/$i;
+
+                if(floor($divisao)==$divisao){
+                    $primo++;
+                }
+            }
+            if($primo > 2){$primo = 0; $menor--;}
+        }
+        return $menor;
     }
 
 
@@ -66,7 +89,20 @@ class Funcoes
 
      * */
     public function SegundoMaior(array $arr): int {
-        
+        $orderArray = [];
+        $segundoMaior=0;
+        foreach ($arr as $array){
+            foreach($array as $item){
+                $orderArray[]= $item;
+            }
+        }
+        rsort($orderArray);
+        unset($orderArray[0]);
+        foreach($orderArray as $item) {
+            $segundoMaior= $item;
+        break; 
+        }
+        return $segundoMaior ; 
     }
 	
 	
@@ -106,7 +142,42 @@ class Funcoes
 
      * */
     
-	public function SequenciaCrescente(array $arr): boolean {
-        
+	public function SequenciaCrescente(array $arr): bool { //modifiquei boolean para bool pois o php tava interpletando como classe
+        $quantidade = count($arr);
+        if($quantidade == 2){
+            return True;
+        }
+    
+        for ($i = 0; $i < $quantidade; $i++){
+            $arrayVerifica = [];
+            $trueVerifica = 0;
+            $itemVerificador =[];
+            $array = $arr; 
+            $newArray =[];
+            unset($array[$i]);
+            foreach ($array as $item){
+                $newArray []= $item;
+            }
+            for($n=0; $n <count($newArray)-1;$n++){
+                $x = $newArray[$n];
+                $y = $newArray[$n+1];
+
+                if($y>$x){
+                $arrayVerifica []= "true";
+                }else{
+                $arrayVerifica []= "false";
+                }    
+            }
+            foreach($arrayVerifica as $h){
+                if($h == "true"){
+                    $trueVerifica++;
+                }
+            }
+            if($trueVerifica==count($arrayVerifica)){
+                return True;
+            }
+            $trueVerifica = 0;
+        }
+        return False;
     }
 }
